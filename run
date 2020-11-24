@@ -20,6 +20,12 @@ function new {
   } > "content/${FILENAME}.wren"
 }
 
+function new:adoc {
+  FILENAME=$1
+  mkdir -p "content/${FILENAME}"
+  touch "content/${FILENAME}/${FILENAME}.adoc"
+}
+
 function remove {
   FILENAME=$1
   rm -rf "content/${FILENAME}.wren"

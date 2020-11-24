@@ -23,6 +23,7 @@ while (!adjectives.isDone) System.print(adjectives.call())
     </pre>
 
     <a href=\"hello.html\">See the Hello for Asciidoc!</a>
+    <a href=\"https://github.com/NinjasCL/chercan\">This page was made with Chercan Static Site Generator</a>
   "}
 
   static title {"Welcome to Chercan Static Site Generator"}
