@@ -1,0 +1,50 @@
+#!/bin/bash
+# Chercan TaskFile
+# See https://github.com/adriancooney/Taskfile
+# A Taskfile is a bash (or zsh etc.) script that follows
+# a specific format. It's called Taskfile, sits in the root of your project
+# (alongside your other project files) and contains the
+# tasks to build your project.
+
+function new {
+  FILENAME=$1
+  mkdir -p "content/${FILENAME}"
+  touch "content/${FILENAME}/${FILENAME}.adoc"
+  {
+    echo "class Page {"
+    echo "  static title {\"Hello Chercán\"}"
+    echo "  static content {Asciidoc.read()}"
+    printf "  static date {\"%s\"}\n" "`date`"
+    echo "}"
+    echo "return Page"
+  } > "content/${FILENAME}.wren"
+}
+
+function remove {
+  FILENAME=$1
+  rm -rf "content/${FILENAME}.wren"
+  rm -rf "content/${FILENAME}/"
+}
+
+function build {
+  make build
+}
+
+function serve {
+  make serve
+}
+
+function help {
+    echo "$0 <task> <args>"
+    echo "Tasks:"
+    compgen -A function | cat -n
+}
+
+function default {
+    # Default task to execute
+    help
+}
+
+
+TIMEFORMAT="Task completed in %3lR"
+time ${@:-default}
