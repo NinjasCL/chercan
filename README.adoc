@@ -1,4 +1,102 @@
-# Chercán Static Site Builder
+:ext-relative:
+:toc: macro
+:toclevels: 4
 
-A simple static site builder using https://wren.io[Wren]
-programming language.
+# https://en.wikipedia.org/wiki/House_wren[Chercán] Static Site Generator
+
+A simple https://en.wikipedia.org/wiki/Static_web_page[static site generator] using https://wren.io[Wren] programming language.
+
+https://ninjas.cl[image:https://img.shields.io/badge/Ninjas-CL-green.svg?style=flat-square[Ninjas.cl]]
+
+toc::[]
+
+## Dependencies
+
+Just https://github.com/wren-lang/wren-cli[_Wren CLI_] is needed. (Although _Python3_ is used for local server mode.).
+
+- Installation:
+  - MacOS: `make wren-macos`
+  - Linux: `make wren-linux`
+
+## 👩‍💻 Structure
+
+```sh
+.
+├── LICENSE
+├── Makefile
+├── README.adoc
+├── chercan
+│   ├── build.wren
+│   └── config.wren
+├── content
+│   ├── hello
+│   │   ├── hello.adoc
+│   │   └── hello.html
+│   ├── hello.wren
+│   └── index.wren
+├── docs
+│   ├── hello.html
+│   ├── index.html
+│   ├── normalize.css
+│   └── sakura-vader.css
+├── static
+│   ├── normalize.css
+│   └── sakura-vader.css
+├── themes
+│   └── default
+│       ├── default.wren.html
+│       ├── home.wren.html
+│       └── partials
+│           ├── footer.wren.html
+│           └── header.wren.html
+└── wren
+```
+
+## 🚀 Usage
+
+Create your files inside `content`. Only root level `*.wren` files supported for now (_Wren CLI_ limitations).
+
+- Example: `make build`
+
+### Asciidoc
+
+You could also create a _directory_ with https://asciidoctor.org/[Asciidoc] files and use the html output to append it to the file contents. It must have the same name as the _Wren_ file.
+
+- Example _Page_:
+
+```js
+
+class Page {
+  static title {"Hello Chercan"}
+  static content {Asciidoc.read()}
+}
+
+return Page
+
+```
+
+### Themes
+
+You can create your own _themes_. They are just _Wren_ files
+that must return a _String_. You have all the _Wren_ power
+in these templates.
+
+Name them as `<name>.wren.html`. Configure the default _theme_ in `chercan/config.wren`.
+
+### Static
+
+The `static` directory would contain any files (images, css, etc). They would be copied to the output directory.
+
+## 📘 LICENSE
+MIT
+
+## 🤩 Credits
+
+++++
+<p>
+  Made with <i class="fa fa-heart">&#9829;</i> by
+  <a href="https://ninjas.cl">
+    Ninjas.cl
+  </a>.
+</p>
+++++

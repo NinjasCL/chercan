@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta content='text/html; charset=utf-8' http-equiv='content-type'>
+  <title>Welcome to Chercan Static Site Generator</title>
+  <meta content='width=device-width, initial-scale=1' name='viewport'>
+  <link href='normalize.css' rel='stylesheet' type='text/css'>
+  <link href='sakura-vader.css' id='sakura-css' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+
+
+    <h2><a href="https://wren.io">Wren</a> is a small, fast, class-based concurrent scripting language</h2>
+    <hr />
+    <p>Think Smalltalk in a Lua-sized package with a dash of Erlang and wrapped up in
+    a familiar, modern syntax.</p>
+    <pre>
+System.print("Hello, world!")
+
+class Wren {
+  flyTo(city) {
+    System.print("Flying to %(city)")
+  }
+}
+
+var adjectives = Fiber.new {
+  ["small", "clean", "fast"].each {|word| Fiber.yield(word) }
+}
+
+while (!adjectives.isDone) System.print(adjectives.call())
+    </pre>
+
+    <a href="hello.html">See the Hello for Asciidoc!</a>
+  
+
+</body>
+</html>
+

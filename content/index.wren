@@ -2,7 +2,7 @@
 class Page {
   // Include any html render here
   static content {"
-    <h2>Wren is a small, fast, class-based concurrent scripting language</h2>
+    <h2><a href=\"https://wren.io\">Wren</a> is a small, fast, class-based concurrent scripting language</h2>
     <hr />
     <p>Think Smalltalk in a Lua-sized package with a dash of Erlang and wrapped up in
     a familiar, modern syntax.</p>
@@ -21,6 +21,8 @@ var adjectives = Fiber.new {
 
 while (!adjectives.isDone) System.print(adjectives.call())
     </pre>
+
+    <a href=\"hello.html\">See the Hello for Asciidoc!</a>
   "}
 
   static title {"Welcome to Chercan Static Site Generator"}
