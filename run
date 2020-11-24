@@ -36,6 +36,14 @@ function build {
   make build
 }
 
+function build:adoc {
+  make a
+}
+
+function build:all {
+  make ba
+}
+
 function serve {
   make serve
 }

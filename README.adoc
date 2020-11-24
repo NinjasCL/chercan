@@ -59,9 +59,13 @@ Create your files inside `content`. Only root level `*.wren` files supported for
 
 - `./run new <name>`: It will create a new filename with its _*.wren_ and _*.adoc_ inside `content`.
 
-- `./run build`: It will execute `make build`.
+- `./run build`: It will execute `make build`. (Builds _wren_ files).
 
-- `./run serve`: It will execute `make serve`.
+- `./run build:adoc`: It would only build _asciidoc_ files. (Requires https://asciidoctor.org/[AsciiDoctor]).
+
+- `./run build:all`: It will execute `make build-all` (Builds _wren_ and _asciidoc_ files).
+
+- `./run serve`: It will execute `make serve`. (Requires _Python3_).
 
 ### Asciidoc
 

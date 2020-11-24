@@ -1,19 +1,25 @@
 WREN_VERSION = 0.3.0
 DIST = docs
 
-.PHONY: serve build wm wl
+.PHONY: build asciidoc build-all serve wren-macos wren-linux
+
+ba build-all:
+	@make asciidoc
+	@make build
 
 b build:
 # Prepare the build dir
 	@rm -rf dist/
 	@mkdir -p dist/
 	@cp -a static/ dist/
-# Compile all asciidoc files first
-	@find content -maxdepth 2 -name "*.adoc" | xargs asciidoctor
 # Find all the content files and pass them to the build without extension
 # Only supports root level files. Because Wren CLI does not have mkdir yet.
 # https://unix.stackexchange.com/a/283915
 	@find content -maxdepth 1 -name "*.wren" | rev | cut -f 2- -d "." | rev | xargs -I{} ./wren chercan/build.wren {}
+
+a asciidoc:
+# Compile all asciidoc files first
+	@find content -maxdepth 2 -name "*.adoc" | xargs asciidoctor
 
 # Github pages
 	@rm -rf ${DIST}
