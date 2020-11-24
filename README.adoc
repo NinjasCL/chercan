@@ -57,7 +57,9 @@ Just https://github.com/wren-lang/wren-cli[_Wren CLI_] is needed. (Although _Pyt
 
 Create your files inside `content`. Only root level `*.wren` files supported for now (_Wren CLI_ limitations).
 
-- `./run new <name>`: It will create a new filename with its _*.wren_ and _*.adoc_ inside `content`.
+- `./run new <name>`: It will create a new _wren_ file inside `content`.
+
+- `./run new:adoc <name>`: It will create a new filename with its _*.wren_ and _*.adoc_ inside `content`.
 
 - `./run build`: It will execute `make build`. (Builds _wren_ files).
 

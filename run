@@ -8,12 +8,10 @@
 
 function new {
   FILENAME=$1
-  mkdir -p "content/${FILENAME}"
-  touch "content/${FILENAME}/${FILENAME}.adoc"
   {
     echo "class Page {"
     echo "  static title {\"Hello Chercán\"}"
-    echo "  static content {Asciidoc.read()}"
+    echo "  static content {\"My Content\"}"
     printf "  static date {\"%s\"}\n" "`date`"
     echo "}"
     echo "return Page"
@@ -24,6 +22,14 @@ function new:adoc {
   FILENAME=$1
   mkdir -p "content/${FILENAME}"
   touch "content/${FILENAME}/${FILENAME}.adoc"
+  {
+    echo "class Page {"
+    echo "  static title {\"Hello Chercán\"}"
+    echo "  static content {Asciidoc.read()}"
+    printf "  static date {\"%s\"}\n" "`date`"
+    echo "}"
+    echo "return Page"
+  } > "content/${FILENAME}.wren"
 }
 
 function remove {
