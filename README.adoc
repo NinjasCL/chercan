@@ -1,0 +1,4 @@
+# Chercán Static Site Builder
+
+A simple static site builder using https://wren.io[Wren]
+programming language.
