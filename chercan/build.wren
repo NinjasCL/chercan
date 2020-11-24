@@ -39,12 +39,12 @@ class Asciidoc {
 
 var page = Meta.compile(File.read(filename)).call()
 
-var extension = ".wren.html"
-var theme = "./themes/%(Config.theme)/"
-
 // Include function for usage with themes
-var Include = Fn.new{|path|
-  var body_ = File.read(theme + path + extension)
+
+var Include = Fn.new {|path|
+  var extension_ = ".wren.html"
+  var theme_ = "./themes/%(Config.theme)/"
+  var body_ = File.read(theme_ + path + extension_)
   return Meta.compile(body_).call().toString
 }
 
@@ -62,12 +62,5 @@ var outpath = Config.out + "/" + outname
 // If *.wren file is on inner dir this would fail
 // wren-cli cannot create directories
 
-var error = Fiber.new {
-  var rendered = File.create(outpath)
-  rendered.writeBytes(out)
-}.try()
-
-if (error) {
-  System.print(error)
-}
-
+var rendered = File.create(outpath)
+rendered.writeBytes(out)

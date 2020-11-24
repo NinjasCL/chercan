@@ -17,13 +17,13 @@ b build:
 # https://unix.stackexchange.com/a/283915
 	@find content -maxdepth 1 -name "*.wren" | rev | cut -f 2- -d "." | rev | xargs -I{} ./wren chercan/build.wren {}
 
-a asciidoc:
-# Compile all asciidoc files first
-	@find content -maxdepth 2 -name "*.adoc" | xargs asciidoctor
-
 # Github pages
 	@rm -rf ${DIST}
 	@mv -f dist ${DIST}
+
+a asciidoc:
+# Compile all asciidoc files first
+	@find content -maxdepth 2 -name "*.adoc" | xargs asciidoctor
 
 s serve:
 	@make build

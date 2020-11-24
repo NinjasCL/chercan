@@ -1,5 +1,4 @@
 
-
 class Page {
   static title {"Hello Chercán"}
   static content {Asciidoc.read()}
