@@ -2,9 +2,11 @@
 :toc: macro
 :toclevels: 4
 
-# https://en.wikipedia.org/wiki/House_wren[Chercán] Static Site Generator
+# https://en.wikipedia.org/wiki/House_wren[Chercan] Static Site Generator
 
 A simple https://en.wikipedia.org/wiki/Static_web_page[static site generator] using https://wren.io[Wren] programming language.
+
+image:https://user-images.githubusercontent.com/292738/100270183-730e7980-2f36-11eb-88f6-b2a1929e23b9.png[https://www.avesdechile.cl/074.htm]
 
 https://ninjas.cl[image:https://img.shields.io/badge/Ninjas-CL-green.svg?style=flat-square[Ninjas.cl]]
 
