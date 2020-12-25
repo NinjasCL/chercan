@@ -91,10 +91,23 @@ return Page
 ### Themes
 
 You can create your own _themes_. They are just _Wren_ files
-that must return a _String_. You have all the _Wren_ power
+that uses _Wren tags_ `<?wren ?>`. You have all the _Wren_ power
 in these templates.
 
 Name them as `<name>.wren.html`. Configure the default _theme_ in `chercan/config.wren`.
+
+#### Example
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+  </head>
+  <body>
+    <h1><?wren echo.call(page.title) ?></h1>
+  </body>
+</html>
+```
 
 ### Static
 
