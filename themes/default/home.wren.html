@@ -1,8 +1,11 @@
-var header = Include.call("partials/header")
-var footer = Include.call("partials/footer")
+<?wren
+var header = include.call("partials/header")
+var footer = include.call("partials/footer")
+?>
 
-return "%(header)
-%(page.content)
-%(page.myprop)
-%(footer)
-"
+<?wren
+echo.call(header)
+echo.call(page.content)
+echo.call(page.myprop)
+echo.call(footer)
+?>

@@ -1,9 +1,11 @@
+<?wren
 // All Wren API is available.
-// Return a string at the end.
+// Use echo.call() to generate string output.
 
-var header = Include.call("partials/header")
-var footer = Include.call("partials/footer")
+var header = include.call("partials/header")
+var footer = include.call("partials/footer")
 
-return "%(header)
+echo.call("%(header)
 %(page.content)
-%(footer)"
+%(footer)")
+?>
