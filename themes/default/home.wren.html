@@ -13,6 +13,18 @@ echo.call(page.myprop)
 
 <br>
 
+<p>You can use any valid Wren Code </p>
+
+<ul>
+  <?wren
+    (1..5).each{|num|
+      echo.call("<li>Item Nº %(num)</li>")
+    }
+  ?>
+</ul>
+
+<br>
+
 <p>
 &lt;?= footer ?&gt; is the same as writing &lt;?wren echo.call(footer) ?&gt;
 </p>
