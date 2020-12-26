@@ -6,6 +6,9 @@ var footer = include.call("partials/footer")
 <?wren
 echo.call(header)
 echo.call(page.content)
+
+// myprop is available in the Page that uses this template
 echo.call(page.myprop)
+
 echo.call(footer)
 ?>
