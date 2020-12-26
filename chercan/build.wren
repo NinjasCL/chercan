@@ -28,47 +28,62 @@ var echo = Fn.new {|body|
 
 // Preprocessor for Wren tag files
 var TagNeedle = "<?wren"
+var TagNeedleEchoWrapper = "<?w="
 var TagNeedleEnd = "?>"
 var TagExtension =  "wren.html"
 
-var Preprocess = Fn.new {|content, index|
+var Preprocess = Fn.new {|content, index, needle, needleEnd|
 
-    var start = content.indexOf(TagNeedle, index)
+    var start = content.indexOf(needle, index)
     index = start
 
-    var end = content.indexOf(TagNeedleEnd, start)
-    var code = content[start + TagNeedle.count...end]
+    var end = content.indexOf(needleEnd, start)
+    var code = content[start + needle.count...end]
 
-    var result = Meta.compile(code).call(echo)
+    var eval = code
+    if (needle == TagNeedleEchoWrapper) {
+      eval = "echo.call(%(code))"
+    }
+
+    // Execute the code contents
+    Meta.compile(eval).call()
+
+    // Build the final echo string
     var out = echoes_.join("").toString
 
     // Reset echo item bag
     // So the output of each tag is isolated
     echoes_ = []
 
-    return [content.replace(TagNeedle + code + TagNeedleEnd, out), index]
+    return [content.replace(needle + code + needleEnd, out), index]
 }
 
-var import_ = Fn.new {|path|
-  var extension_ = "." + TagExtension
-
-  var body_ = File.read(path + extension_)
-
-  // Search for all instances of <?wren tags
-  var tagCount = body_.split(TagNeedle).count - 1
+var ReplaceTags = Fn.new{|content, needle, needleEnd|
+  // Search for all instances of tags
+  var tagCount = content.split(needle).count - 1
   var processed = 0
   var index = 0
   var result = null
 
   // Preprocess each tag until done
   while (processed < tagCount) {
-      result = Preprocess.call(body_, index)
-      body_ = result[0].trimStart()
+      result = Preprocess.call(content, index, needle, needleEnd)
+      content = result[0].trimStart()
       index = result[1]
       processed = processed + 1
+
+      // Clean echo bag just to be sure
       echoes_ = []
   }
-  return body_
+  return content
+}
+
+var import_ = Fn.new {|path|
+  var extension_ = "." + TagExtension
+  var content = File.read(path + extension_)
+  content = ReplaceTags.call(content, TagNeedle, TagNeedleEnd)
+  content = ReplaceTags.call(content, TagNeedleEchoWrapper, TagNeedleEnd)
+  return content
 }
 
 // Include a file inside themes using this function
@@ -95,18 +110,8 @@ class Content {
 
   static render(file) {
     var content = Content.read(file)
-    // Search for all instances of <?wren tags
-    var tagCount = content.split(TagNeedle).count - 1
-    var processed = 0
-    var index = 0
-    var result = null
-
-    while (processed < tagCount) {
-        result = Preprocess.call(content, index)
-        content = result[0].trimStart()
-        index = result[1]
-        processed = processed + 1
-    }
+    content = ReplaceTags.call(content, TagNeedle, TagNeedleEnd)
+    content = ReplaceTags.call(content, TagNeedleEchoWrapper, TagNeedleEnd)
     return content
   }
 
@@ -153,7 +158,7 @@ Fiber.new {
 // If *.wren file is on inner dir this would fail
 // wren-cli cannot create directories
 
-var out = include.call(tpl, true)
+var out = include.call(tpl)
 var outname = Path.replace("content/", "") + ".html"
 var outpath = Config.out + "/" + outname
 
