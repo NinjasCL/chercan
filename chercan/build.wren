@@ -28,9 +28,12 @@ var echo = Fn.new {|body|
 
 // Preprocessor for Wren tag files
 var TagNeedle = "<?wren"
-var TagNeedleEchoWrapper = "<?w="
+var TagNeedleEchoWrapper = "<?="
 var TagNeedleEnd = "?>"
-var TagExtension =  "wren.html"
+var TagExtension = "wren.html"
+var handlers = {
+  TagNeedleEchoWrapper: Fn.new{|content| "echo.call(%(content))"}
+}
 
 var Preprocess = Fn.new {|content, index, needle, needleEnd|
 
@@ -41,8 +44,8 @@ var Preprocess = Fn.new {|content, index, needle, needleEnd|
     var code = content[start + needle.count...end]
 
     var eval = code
-    if (needle == TagNeedleEchoWrapper) {
-      eval = "echo.call(%(code))"
+    if (handlers[needle]) {
+      eval = handlers[needle].call(code)
     }
 
     // Execute the code contents

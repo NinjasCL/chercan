@@ -106,7 +106,7 @@ Name them as `<name>.wren.html`. Configure the default _theme_ in `chercan/confi
   <body>
     <h1>
       <?wren echo.call(page.title) ?>
-      <small><?w= "You can also use the shorthand echo tag" ?></small>
+      <small><?= "You can also use the shorthand echo tag" ?></small>
     </h1>
   </body>
 </html>

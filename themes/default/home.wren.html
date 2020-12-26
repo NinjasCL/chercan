@@ -1,17 +1,20 @@
 <?wren
-var header = include.call("partials/header")
+var header = include.call("partials/header2")
 var footer = include.call("partials/footer")
 ?>
 
-<?wren
-echo.call(header)
-echo.call(page.content)
-?>
+<?= header ?>
+<?= page.content ?>
 
 <?wren
 // myprop is available in the Page that uses this template
 echo.call(page.myprop)
 ?>
 
-&lt;?w= footer ?&gt; is the same as writing &lt;?wren echo.call(footer) ?&gt;
-<?w= footer ?>
+<br>
+
+<p>
+&lt;?= footer ?&gt; is the same as writing &lt;?wren echo.call(footer) ?&gt;
+</p>
+
+<?= footer ?>
